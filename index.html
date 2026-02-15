@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陈运至尊下载基地</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Microsoft YaHei",sans-serif;background:#0b0e1a;color:#fff;padding-bottom:100px}
+.bg{position:fixed;top:0;left:0;width:100%;height:100%;background-image:url('https://wl.lygg.shop/view.php/9f68ae3a07285411c3cdd72d66480842.jpg');background-size:cover;background-position:center;z-index:-999;filter:brightness(0.22)}
+.header{text-align:center;padding:60px 20px 30px}
+.avatar-wrap{position:relative;width:140px;height:140px;margin:0 auto 20px;cursor:pointer}
+.avatar-spin{animation:avatarSpin 0.7s ease forwards}
+@keyframes avatarSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.avatar-border{position:absolute;top:-6px;left:-6px;width:calc(100% + 12px);height:calc(100% + 12px);border-radius:50%;background:conic-gradient(#00ccff,#9933ff,#ff33cc,#ffcc00,#00ccff);animation:spin 6s linear infinite}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.avatar{position:relative;z-index:1;width:100%;height:100%;border-radius:50%;overflow:hidden;border:4px solid #111}
+.avatar img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.title{font-size:32px;font-weight:bold;background:linear-gradient(90deg,#00ccff,#9933ff,#ff33cc);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px}
+.subtitle{font-size:14px;color:#aaa}
+.buy-btn-container{max-width:700px;margin:0 auto 25px;padding:0 20px}
+.buy-btn{display:block;width:100%;padding:20px;text-align:center;background:linear-gradient(90deg,#ff3c74,#ff9500,#9327ff);background-size:300% 300%;color:#fff;font-size:16px;font-weight:bold;border-radius:16px;text-decoration:none;box-shadow:0 8px 25px rgba(255,60,116,0.4);transition:.3s;animation:btnFlow 2s ease infinite}
+@keyframes btnFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.buy-btn:hover{transform:translateY(-3px)}
+.container{max-width:700px;margin:0 auto;padding:0 20px}
+.zone-title{font-size:18px;margin:20px 0 15px;padding-left:10px;border-left:3px solid #00ccff}
+.zone-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.zone{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);border-radius:20px;padding:25px 15px;text-align:center;border:1px solid rgba(255,255,255,0.1);cursor:pointer;transition:.3s}
+.zone:hover{transform:translateY(-6px);border-color:#00ccff;background:rgba(0,204,255,0.1)}
+.zone img{width:55px;height:55px;border-radius:14px;object-fit:cover;margin-bottom:12px;pointer-events:none}
+.zone-name{font-size:16px;font-weight:bold;margin-bottom:4px}
+.zone-desc{font-size:12px;color:#ccc}
+.notice-modal{display:flex;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;padding:20px}
+.notice-box{background:linear-gradient(135deg,#121a33,#1b2340);border:2px solid #00ccff;border-radius:20px;width:100%;max-width:400px;padding:30px;position:relative;box-shadow:0 0 30px #00ccff}
+.notice-close{position:absolute;top:15px;right:20px;font-size:22px;color:#fff;cursor:pointer}
+.notice-title{font-size:22px;font-weight:bold;text-align:center;margin-bottom:20px;animation:titleColor 1.5s linear infinite alternate}
+@keyframes titleColor{0%{color:#00ccff}50%{color:#ff33cc}100%{color:#ff9500}}
+.notice-content{font-size:15px;line-height:1.6;color:#eee;text-align:center}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.modal-box{background:rgba(20,26,45,0.95);backdrop-filter:blur(20px);border-radius:24px;width:100%;max-width:420px;padding:30px;border:1px solid rgba(255,255,255,0.1);position:relative}
+.modal-close{position:absolute;top:15px;right:20px;font-size:20px;color:#fff;cursor:pointer}
+.modal-title{font-size:20px;color:#00ccff;margin-bottom:20px;text-align:center}
+.app-item{background:rgba(255,255,255,0.06);border-radius:16px;padding:16px;margin-bottom:12px;display:flex;align-items:center}
+.app-icon{width:44px;height:44px;background:linear-gradient(90deg,#00ccff,#9933ff);border-radius:12px;display:grid;place-items:center;font-weight:bold;margin-right:12px}
+.app-info{flex:1}
+.app-name{font-size:15px;font-weight:bold}
+.app-desc{font-size:12px;color:#ccc}
+.download-btn{padding:8px 14px;background:linear-gradient(90deg,#00ccff,#9933ff);border:none;border-radius:10px;color:#fff;font-weight:bold;cursor:pointer}
+.footer{text-align:center;margin-top:60px;font-size:12px;color:#777;line-height:1.6;padding:0 20px}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="notice-modal" id="noticeModal">
+  <div class="notice-box">
+    <div class="notice-close" onclick="closeNotice()">×</div>
+    <div class="notice-title">📢 至尊公告</div>
+    <div class="notice-content">欢迎使用陈运至尊下载基地<br>所有资源免费使用｜稳定更新<br>购买授权请点击下方购买按钮<br>祝使用愉快！</div>
+  </div>
+</div>
+
+<div class="header">
+  <div class="avatar-wrap" id="avatarWrap" onclick="rotateAvatar()">
+    <div class="avatar-border"></div>
+    <div class="avatar"><img src="https://wl.lygg.shop/view.php/ceccc301691ff092e8c5911b3e354707.jpg" alt="头像"></div>
+  </div>
+  <div class="title">陈运至尊下载基地</div>
+  <div class="subtitle">安全｜纯净｜免费｜稳定</div>
+</div>
+
+<div class="buy-btn-container">
+  <a href="https://new.818fka.com/shop/1IZC4MB3" class="buy-btn">🔥 和平数据号购买 🔥</a>
+</div>
+
+<div class="container">
+  <div class="zone-title">📦 四大资源区</div>
+  <div class="zone-grid">
+    <div class="zone" onclick="openModal('modal-ruanjian')">
+      <img src="https://wl.lygg.shop/view.php/ceccc301691ff092e8c5911b3e354707.jpg">
+      <div class="zone-name">PUBG专区</div>
+      <div class="zone-desc">公益直装 · 稳定</div>
+    </div>
+    <div class="zone" onclick="openModal('modal-yingshi')">
+      <img src="https://wl.lygg.shop/view.php/af4aea4ba6c3efa9662ee8d9e56ed598.png">
+      <div class="zone-name">和平精英专区</div>
+      <div class="zone-desc">公益美化 · 稳定</div>
+    </div>
+    <div class="zone" onclick="openModal('modal-youxi')">
+      <img src="http://cccimg.com/view.php/f6e83df9f157ddc55ede2335cc19c75b.jpg">
+      <div class="zone-name">印度吃鸡游戏</div>
+      <div class="zone-desc">辅助工具 · 稳定</div>
+    </div>
+    <div class="zone" onclick="openModal('modal-sucai')">
+      <img src="https://wl.lygg.shop/view.php/aca706af6cbc134d85d270ac70b3b345.png">
+      <div class="zone-name">其他专区</div>
+      <div class="zone-desc">ZLNP396 · 稳定</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-ruanjian">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeModal()">×</div>
+    <div class="modal-title">PUBG专区</div>
+    <div class="app-item">
+      <div class="app-icon">正</div>
+      <div class="app-info"><div class="app-name">PUBG四服</div><div class="app-desc">稳定一辈子 · 😇</div></div>
+      <button class="download-btn" onclick="window.open('https://www.123684.com/s/2AZ2vd-43HTd')">下载</button>
+    </div>
+    <div class="app-item">
+      <div class="app-icon">体</div>
+      <div class="app-info"><div class="app-name">PUBG国体</div><div class="app-desc">不拉 · 😍</div></div>
+      <button class="download-btn" onclick="window.open('https://www.123684.com/s/2AZ2vd-x3HTd')">下载</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-yingshi">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeModal()">×</div>
+    <div class="modal-title">和平专区</div>
+    <div class="app-item">
+      <div class="app-icon">和</div>
+      <div class="app-info"><div class="app-name">美化</div><div class="app-desc">免费</div></div>
+      <button class="download-btn" onclick="window.open('https://www.123684.com/s/2AZ2vd-p3HTd')">下载</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-youxi">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeModal()">×</div>
+    <div class="modal-title">游戏专区</div>
+    <div class="app-item">
+      <div class="app-icon">花</div>
+      <div class="app-info"><div class="app-name">花落辅助</div><div class="app-desc">稳定 · 不封号</div></div>
+      <button class="download-btn" onclick="window.open('https://www.123684.com/s/2AZ2vd-13HTd')">下载</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-sucai">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeModal()">×</div>
+    <div class="modal-title">其他专区</div>
+    <div class="app-item">
+      <div class="app-icon">其他</div>
+      <div class="app-info"><div class="app-name">大全</div><div class="app-desc">不知道</div></div>
+      <button class="download-btn" onclick="window.open('https://www.123684.com/s/2AZ2vd-x3HTd')">下载</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">@陈运 专属定制<br>作者：陈运<br>官方正式频道:@ZLNP396</div>
+
+<script>
+var _0xabcdef=['classList','add','remove','getElementById','style','display','none','querySelectorAll','forEach'];
+function rotateAvatar(){
+  var a=document[_0xabcdef[3]]('avatarWrap');
+  a[_0xabcdef[0]][_0xabcdef[1]]('avatar-spin');
+  setTimeout(function(){a[_0xabcdef[0]][_0xabcdef[2]]('avatar-spin')},700);
+}
+function closeNotice(){
+  document[_0xabcdef[3]]('noticeModal')[_0xabcdef[4]][_0xabcdef[5]]=_0xabcdef[6];
+}
+function openModal(id){
+  closeModal();
+  document[_0xabcdef[3]](id)[_0xabcdef[0]][_0xabcdef[1]]('show');
+}
+function closeModal(){
+  document[_0xabcdef[7]]('.modal')[_0xabcdef[8]](function(e){
+    e[_0xabcdef[0]][_0xabcdef[2]]('show');
+  });
+}
+</script>
+</body>
+</html>
